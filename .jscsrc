@@ -4,5 +4,5 @@
     "build/**"
   ],
   "esprima": "esprima-fb",
-  "validateIndentation": 2
+  "validateIndentation": 4
 }
