@@ -1,0 +1,20 @@
+.dashboard {
+
+  .panel {
+    border: solid 1px black;
+    height: 95vh;
+    padding: 10px;
+  }
+
+  .newsFeed {
+    @extend .panel;
+    float: left;
+    width: 300px;
+  }
+
+  .readFrame {
+    @extend .panel;
+
+    width: 98%;
+  }
+}
