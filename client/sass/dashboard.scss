@@ -6,10 +6,33 @@
     padding: 10px;
   }
 
+  .vertical-middle {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+  }
+
   .newsFeed {
     @extend .panel;
     float: left;
     width: 300px;
+    overflow: auto;
+
+    .feedItem {
+
+      padding: 5px 0;
+
+      .time {
+        margin-top: 3px;
+        color: red;
+        float: left;
+        font-size: 12px;
+        width: 50px;
+      }
+      .title {
+        margin-left: 50px;
+      }
+    }
   }
 
   .readFrame {
