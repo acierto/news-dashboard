@@ -39,5 +39,10 @@
     @extend .panel;
 
     width: 98%;
+
+    object {
+      width: calc(100% - 311px);
+      height: 100%;
+    }
   }
 }

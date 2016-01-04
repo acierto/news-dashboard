@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { NewsFeedItem } from './NewsFeedItem';
+import { ReadFrame } from './ReadFrame';
 
 const $ = require('jquery');
 const _ = require('lodash');
@@ -37,7 +38,7 @@ const Dashboard = React.createClass({
         return (
             <div className="dashboard">
                 <div className="newsFeed">{items}</div>
-                <div className="readFrame"></div>
+                <ReadFrame/>
             </div>
         );
     }
