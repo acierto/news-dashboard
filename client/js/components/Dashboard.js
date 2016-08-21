@@ -14,11 +14,9 @@ export default class Dashboard extends Component {
 
     componentDidMount() {
         $.get(this.props.source, (result) => {
-            if (this.isMounted()) {
-                this.setState({
-                    news: result
-                });
-            }
+            this.setState({
+                news: result
+            });
         });
     }
 

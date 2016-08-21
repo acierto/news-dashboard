@@ -1,9 +1,9 @@
-const loki = require('lokijs');
+import loki from 'lokijs';
+
+import Crawler from 'crawler';
+import korrespondent from './scrappers/korrespondent';
 
 const db = new loki('news.json');
-const Crawler = require("crawler");
-
-const korrespondent = require('./scrappers/korrespondent');
 
 const articles = db.addCollection('articles');
 
@@ -12,7 +12,7 @@ const c = new Crawler({
     callback: function (error, result, $) {
         korrespondent.parse($, articles);
     },
-    onDrain: function() {
+    onDrain: function () {
         db.saveDatabase();
     }
 });
