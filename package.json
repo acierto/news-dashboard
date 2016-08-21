@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node node_modules/.bin/babel-node server",
-    "test": "gulp test",
-    "postinstall": "./node_modules/.bin/gulp build:dev"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -56,24 +55,17 @@
     "gulp-changed": "1.2.1",
     "gulp-connect": "5.0.0",
     "gulp-eslint": "3.0.1",
-    "gulp-jscs": "4.0.0",
     "gulp-load-plugins": "1.1.0",
-    "gulp-mocha": "3.0.1",
-    "gulp-mocha-selenium": "1.0.0",
     "gulp-nodemon": "2.0.2",
-    "gulp-sass": "2.0.4",
     "gulp-shell": "0.5.0",
     "gulp-util": "3.0.4",
     "lokijs": "1.4.1",
-    "node-bourbon": "4.2.1-beta1",
-    "node-sass": "3.8.0",
     "phantomjs": "2.1.7",
     "postcss-loader": "0.10.1",
     "precss": "^1.4.0",
     "react-css-modules": "3.7.10",
     "react-hot-loader": "1.2.5",
     "style-loader": "0.13.0",
-    "supertest": "2.0.0",
     "vinyl-paths": "2.0.0",
     "webpack": "1.12.2",
     "webpack-dev-server": "1.12.0"

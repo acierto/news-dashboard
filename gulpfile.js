@@ -3,7 +3,6 @@ const fs = require('fs');
 var path = require('path');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var karma = require('karma').server;
 var eslint = require('gulp-eslint');
 var connect = require('gulp-connect');
 var shell = require('gulp-shell');
@@ -55,10 +54,6 @@ gulp.task('eslint-backend', function () {
 });
 
 gulp.task('eslint', ['eslint-frontend', 'eslint-backend']);
-
-gulp.task('check', ['eslint']);
-gulp.task('check:ci', ['eslint']);
-gulp.task('check:all', ['eslint']);
 
 gulp.task('clean', function () {
     return gulp
@@ -119,8 +114,6 @@ gulp.task('build:prod-full', ['clean'], function () {
 // ----------------------------------------------------------------------------
 gulp.task('server', shell.task(['npm run start']));
 
-gulp.task('webpack-server', shell.task(['node ./hot/server']));
-
 // Source maps server
 gulp.task('server:sources', function () {
     connect.server({
@@ -135,7 +128,6 @@ gulp.task('server:sources', function () {
 gulp.task('serve', ['server']);
 gulp.task('ls', ['build:ls', 'server:sources']);
 gulp.task('dev', ['webpack', 'server', 'server:sources', 'browser-sync']);
-gulp.task('hot', ['webpack-server']);
 gulp.task('prod', ['build:prod', 'server', 'server:sources']);
 gulp.task('build', ['build:prod-full']);
-gulp.task('default', ['check', 'dev']);
+gulp.task('default', ['eslint', 'dev']);
