@@ -1,11 +1,13 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import React, {Component} from 'react'; // eslint-disable-line
+import cssmodules from 'react-css-modules';
 
 import NewsFeedItem from './NewsFeedItem';
 import ReadFrame from './ReadFrame';
+import styles from './Dashboard.css';
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
 
     constructor(props) {
         super(props);
@@ -31,10 +33,12 @@ export default class Dashboard extends Component {
         }
 
         return (
-            <div className="dashboard">
-                <div className="newsFeed">{items}</div>
+            <div>
+                <div styleName="newsFeed">{items}</div>
                 <ReadFrame/>
             </div>
         );
     }
 }
+
+export default cssmodules(Dashboard, styles);

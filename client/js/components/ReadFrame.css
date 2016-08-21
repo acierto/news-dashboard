@@ -1,0 +1,9 @@
+.readFrame {
+    composes: panel from './Panel.css';
+    width: 98%;
+}
+
+.readFrame object {
+    width: calc(100% - 311px);
+    height: 100%;
+}

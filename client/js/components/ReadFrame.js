@@ -1,11 +1,15 @@
+import cssmodules from 'react-css-modules';
 import React, {Component} from 'react'; // eslint-disable-line
+import styles from './ReadFrame.css';
 
-export default class ReadFrame extends Component {
+class ReadFrame extends Component {
     render() {
         return (
-            <div className="readFrame">
+            <div styleName="readFrame">
                 <object data="http://korrespondent.net/"/>
             </div>
         );
     }
 }
+
+export default cssmodules(ReadFrame, styles);

@@ -1,12 +1,16 @@
+import cssmodules from 'react-css-modules';
 import React, {Component} from 'react'; // eslint-disable-line
+import styles from './NewsFeed.css';
 
-export default class NewsFeedItem extends Component {
+class NewsFeedItem extends Component {
     render() {
         return (
-            <div className="feedItem">
-                <div className="time">{this.props.time}</div>
-                <div className="title">{this.props.title}</div>
+            <div styleName="feedItem">
+                <div styleName="time">{this.props.time}</div>
+                <div styleName="title">{this.props.title}</div>
             </div>
         );
     }
 }
+
+export default cssmodules(NewsFeedItem, styles);

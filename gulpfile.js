@@ -5,21 +5,14 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var karma = require('karma').server;
 var eslint = require('gulp-eslint');
-var mocha = require('gulp-mocha');
-var mochaSelenium = require('gulp-mocha-selenium');
-var nodemon = require('gulp-nodemon');
 var connect = require('gulp-connect');
 var shell = require('gulp-shell');
-var sass = require('gulp-sass');
 var webpack = require('webpack');
-var del = require('del');
 var vinylPaths = require('vinyl-paths');
 var browserSync = require('browser-sync');
-var reload = browserSync.reload;
 
 // Webpack configs
 var buildCfg = require('./webpack.config');
-var buildDevCfg = require('./webpack.dev-config');
 
 var src = './client/';
 var dest = './build/';
@@ -31,28 +24,9 @@ var FRONTEND_FILES = [
     src + 'js/**/*.{js,jsx}'
 ];
 
-var HTML_FILES = [
-    src + 'index.html',
-    src + 'style-guide.html'
-];
-
-var ASSETS = [
-    src + 'assets/**/*'
-];
-
-var STYLE_CSS = [
-    src + 'css/**/*.css'
-];
-
 var BACKEND_FILES = [
-    'test/server/**/*.js',
     '*.js'
 ];
-
-var logReload = function (msg) {
-    console.log('[BS] reloading:', msg);
-    reload({stream: true});
-};
 
 gulp.task('eslint-frontend', function () {
     return gulp
@@ -92,38 +66,9 @@ gulp.task('clean', function () {
         .pipe(vinylPaths(del));
 });
 
-gulp.task('copy:html', function () {
-    gulp.src(HTML_FILES)
-        .pipe(gulp.dest(dest));
-});
-
-gulp.task('copy:assets', function () {
-    gulp.src(ASSETS)
-        .pipe(gulp.dest(path.join(dest, 'assets')));
-});
-
-gulp.task('copy:css', function () {
-    gulp.src(STYLE_CSS)
-        .pipe(gulp.dest(path.join(dest, 'css')));
-});
-
-gulp.task('copy', ['copy:assets', 'copy:css', 'copy:html']);
-
-gulp.task('sass', function () {
-    gulp.src(path.join(src, 'sass', '*.scss'))
-        .pipe(sass(
-            {
-                sourcemap: true,
-                includePaths: require('node-bourbon').includePaths
-            }
-        ))
-        .pipe(gulp.dest(path.join(dest, 'css')))
-        .pipe(reload({stream: true}));
-});
-
 gulp.task('webpack', function (done) {
     /* eslint-disable */
-    webpack(buildDevCfg).run(function (err, stats) {
+    webpack(buildCfg).run(function (err) {
         if (err) {
             throw new gutil.PluginError('webpack', err);
         }
@@ -133,18 +78,6 @@ gulp.task('webpack', function (done) {
 });
 /* eslint-enable */
 
-gulp.task('build:dev', ['copy', 'sass', 'webpack']);
-
-gulp.task('watch', function () {
-    gulp.watch([
-        path.join(src, 'js', '**', '*.{js,jsx}'),
-        path.join(src, 'index.html')
-    ], ['webpack']).on('change', logReload);
-
-    gulp.watch([
-        path.join(src, 'sass', '**', '*.scss')
-    ], ['sass']).on('change', logReload);
-});
 
 gulp.task('browser-sync', function () {
     browserSync({
@@ -181,12 +114,6 @@ gulp.task('build:prod-full', ['clean'], function () {
     return gulp.run('build:prod');
 });
 
-gulp.task('watch:prod', function () {
-    gulp.watch([
-        path.join('build', '**', '*.{js,jsx}')
-    ], ['build:prod']);
-});
-
 // ----------------------------------------------------------------------------
 // Servers
 // ----------------------------------------------------------------------------
@@ -203,51 +130,12 @@ gulp.task('server:sources', function () {
 });
 
 // ----------------------------------------------------------------------------
-// Tests
-// ----------------------------------------------------------------------------
-
-gulp.task('test:karma', function (done) {
-    karma.start({
-        configFile: path.join(__dirname, 'karma.conf.js'),
-        singleRun: true
-    }, done);
-});
-
-gulp.task('test:server', function (done) {
-    process.env.PORT = 3010;
-    return gulp.src(path.join('test', 'server', '**', '*-spec.js'), {read: false})
-        .pipe(mocha({reporter: 'dot'}), done);
-});
-
-gulp.task('test:acceptance', function (done) {
-    return gulp.src('test/acceptance/*-spec.js', {read: false})
-        .pipe(mochaSelenium({
-            browserName: 'firefox',
-            host: 'localhost',
-            port: '4444',
-            bail: true,
-            reporter: 'dot',
-            usePromises: true,
-            timeout: 15000
-        })
-            .once('end', function () {
-                    /* eslint-disable no-process-exit */
-                    process.exit();
-
-                    /* eslint-enable no-process-exit */
-                }
-            ), done);
-
-});
-
-// ----------------------------------------------------------------------------
 // Aggregations
 // ----------------------------------------------------------------------------
 gulp.task('serve', ['server']);
-gulp.task('test', ['test:server', 'test:karma', 'test:acceptance']);
-gulp.task('ls', ['build:ls', 'watch:ls', 'server:sources']);
-gulp.task('dev', ['build:dev', 'watch', 'server', 'server:sources', 'browser-sync']);
+gulp.task('ls', ['build:ls', 'server:sources']);
+gulp.task('dev', ['webpack', 'server', 'server:sources', 'browser-sync']);
 gulp.task('hot', ['webpack-server']);
-gulp.task('prod', ['build:prod', 'watch:prod', 'server', 'server:sources']);
+gulp.task('prod', ['build:prod', 'server', 'server:sources']);
 gulp.task('build', ['build:prod-full']);
 gulp.task('default', ['check', 'dev']);

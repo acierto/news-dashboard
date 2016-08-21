@@ -1,0 +1,15 @@
+.feedItem {
+    padding: 5px 0;
+}
+
+.time {
+    margin-top: 3px;
+    color: red;
+    float: left;
+    font-size: 12px;
+    width: 50px;
+}
+
+.title {
+    margin-left: 50px;
+}

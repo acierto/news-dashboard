@@ -1,6 +1,7 @@
 {
   "plugins": [
     "lodash",
+    "syntax-decorators",
     "transform-decorators-legacy"
   ],
   "presets": [

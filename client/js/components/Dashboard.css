@@ -1,0 +1,19 @@
+.panel {
+    border: solid 1px black;
+    height: 95vh;
+    padding: 10px;
+}
+
+.vertical-middle {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+}
+
+.newsFeed {
+    composes: panel from './Panel.css';
+
+    float: left;
+    overflow: auto;
+    width: 300px;
+}
