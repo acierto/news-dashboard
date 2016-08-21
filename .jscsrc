@@ -1,8 +1,0 @@
-{
-  "excludeFiles": [
-    "node_modules/**",
-    "build/**"
-  ],
-  "esprima": "esprima-fb",
-  "validateIndentation": 4
-}
