@@ -1,5 +1,5 @@
 // Gulpfile
-var fs = require('fs');
+const fs = require('fs');
 var path = require('path');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -190,33 +190,8 @@ gulp.task('watch:prod', function () {
 // ----------------------------------------------------------------------------
 // Servers
 // ----------------------------------------------------------------------------
-// Dev. server
-var called = false;
-gulp.task('server', function (cb) {
-    return nodemon({
-        script: 'server.js',
-        ext: 'js,jsx',
-        watch: [
-            'server',
-            path.join(src, 'index.html')
-        ]
-    })
-        .on('start', function onStart() {
-            if (!called) {
-                cb();
-            }
+gulp.task('server', shell.task(['npm run start']));
 
-            called = true;
-        })
-        .on('restart', function onRestart() {
-            //delay the browser reload
-            setTimeout(function reload() {
-                browserSync.reload({stream: false});
-            }, 500);
-        });
-});
-
-// Hot reload webpack server
 gulp.task('webpack-server', shell.task(['node ./hot/server']));
 
 // Source maps server

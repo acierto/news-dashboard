@@ -1,9 +1,9 @@
-var loki = require('lokijs');
+const loki = require('lokijs');
 
-var db = new loki('news.json');
-var Crawler = require("crawler");
+const db = new loki('news.json');
+const Crawler = require("crawler");
 
-var korrespondent = require('./scrappers/korrespondent');
+const korrespondent = require('./scrappers/korrespondent');
 
 const articles = db.addCollection('articles');
 

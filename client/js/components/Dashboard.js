@@ -1,10 +1,9 @@
+import $ from 'jquery';
+import _ from 'lodash';
 import React, {Component} from 'react'; // eslint-disable-line
 
 import NewsFeedItem from './NewsFeedItem';
 import ReadFrame from './ReadFrame';
-
-const $ = require('jquery');
-const _ = require('lodash');
 
 export default class Dashboard extends Component {
 
@@ -24,7 +23,6 @@ export default class Dashboard extends Component {
     }
 
     render() {
-
         const items = [];
 
         const news = this.state.news;

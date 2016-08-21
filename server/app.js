@@ -1,8 +1,9 @@
-const path = require('path');
-const express = require('express');
-const compression = require('compression');
-const redirect = require('express-redirect');
-const app = express();
+import compression from 'compression';
+import express from 'express';
+import redirect from 'express-redirect';
+import path from 'path';
+
+export const app = express();
 
 app.use(compression());
 
@@ -26,5 +27,3 @@ const port = process.env.PORT || 3000;
 app.server = app.listen(port, function () {
     console.log('Express app listening at port %s', app.server.address().port);
 });
-
-module.exports = app;

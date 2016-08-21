@@ -9,4 +9,4 @@ export default class NewsFeedItem extends Component {
             </div>
         );
     }
-};
+}
