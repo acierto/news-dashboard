@@ -2,9 +2,9 @@
  * Webpack configuration
  */
 
-var _ = require('lodash');
-var webpack = require('webpack');
-var prodConfig = require('./webpack.config');
+const _ = require('lodash');
+const prodConfig = require('./webpack.config');
+const webpack = require('webpack');
 
 module.exports = _.extend({}, prodConfig, {
   plugins: [

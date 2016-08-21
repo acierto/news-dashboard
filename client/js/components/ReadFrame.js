@@ -1,13 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react'; // eslint-disable-line
 
-const ReadFrame = React.createClass({
-    render: function() {
+export default class ReadFrame extends Component {
+    render() {
         return (
             <div className="readFrame">
-                <object data="http://korrespondent.net/"></object>
+                <object data="http://korrespondent.net/"/>
             </div>
         );
     }
-});
-
-export { ReadFrame };
+}

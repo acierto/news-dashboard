@@ -1,30 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react'; // eslint-disable-line
 
-import { NewsFeedItem } from './NewsFeedItem';
-import { ReadFrame } from './ReadFrame';
+import NewsFeedItem from './NewsFeedItem';
+import ReadFrame from './ReadFrame';
 
 const $ = require('jquery');
 const _ = require('lodash');
 
-const Dashboard = React.createClass({
+export default class Dashboard extends Component {
 
-    getInitialState: function () {
-        return {
-            news: []
-        };
-    },
+    constructor(props) {
+        super(props);
+        this.state = {news: []};
+    }
 
-    componentDidMount: function () {
-        $.get(this.props.source, function (result) {
+    componentDidMount() {
+        $.get(this.props.source, (result) => {
             if (this.isMounted()) {
                 this.setState({
                     news: result
                 });
             }
-        }.bind(this));
-    },
+        });
+    }
 
-    render: function () {
+    render() {
 
         const items = [];
 
@@ -42,6 +41,4 @@ const Dashboard = React.createClass({
             </div>
         );
     }
-});
-
-export { Dashboard };
+}

@@ -1,7 +1,7 @@
 // Webpack configuration
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   cache: true,
@@ -14,10 +14,10 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react', 'stage-0']
         }
       },
       { test: /\.css$/, loader: ExtractTextPlugin.extract('style!css?importLoaders=1') },

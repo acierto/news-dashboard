@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react'; // eslint-disable-line
 
-const NewsFeedItem = React.createClass({
-    render: function() {
+export default class NewsFeedItem extends Component {
+    render() {
         return (
             <div className="feedItem">
                 <div className="time">{this.props.time}</div>
@@ -9,6 +9,4 @@ const NewsFeedItem = React.createClass({
             </div>
         );
     }
-});
-
-export { NewsFeedItem };
+};
