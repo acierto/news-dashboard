@@ -1,0 +1,6 @@
+## Setup
+
+Install development dependencies
+`$ npm install`
+
+Run `$ gulp`
